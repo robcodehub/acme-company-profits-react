@@ -1,58 +1,58 @@
 <!DOCTYPE html>
-
 <html>
-
-<head>
-
-
+  <head>
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.0.1/react-router-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <style>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.0.1/react-router-dom.js"></script>
-
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
-
-  <style>
-
-
-  </style>
-
-
-</head>
-
-<body>
-
-  <div id='root'>
-
-
-  </div>
-
-
+    </style>
+  </head>
+  <body>
+    <div id='root'></div>
     <script type="text/babel">
-    const root = document.querySelector('#root');
-    const { render } = ReactDOM;
-    const { Component } = React;
-    const { HashRouter, Route, Switch, Link, Redirect } = ReactRouterDOM;
+      const root = document.querySelector('#root');
+      const { render } = ReactDOM;
+      const { Component } = React;
+      const { HashRouter, Route, Switch, Link, Redirect } = ReactRouterDOM;
 
-    const Nav = ({ companies }) => {
-      return (
-        <div className = 'nav'>
-          <Link to='/'>Home</Link>
-          <Link to='/companies'>Companies</Link>
-         </div>
-      )
+      const Nav = ({ companies }) => {
+        return (
+          <div className = 'nav'>
+            <Link to='/'>Home</Link>
+            <Link to='/companies'>Companies</Link>
+          </div>
+        )
+      };
 
-    };
+      class App extends Component{
+        constructor(){
+          super()
+          this.state = {
+            companies: []
+          }
+        }
 
+        async componentDidMount(){
+          const companies = (await axios.get("https://acme-users-api-rev.herokuapp.com/api/companies")).data
+          this.setState({ companies })
+        }
+
+        render(){
+          const { companies } = this.state
+          return (
+            <HashRouter>
+              <Route render = { () => <Nav companies = { companies } /> } />
+            </HashRouter>
+          )
+        }
+
+      }
+
+      render(<App />, root)
 
     </script>
-
-
-
-
-</body>
-
-
+  </body>
 </html>
