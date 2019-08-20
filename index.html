@@ -42,6 +42,14 @@
         return <div>Welcome!</div>
       };
 
+      const Companies = ( { companies }) => {
+        return (
+          <ul>
+            {companies.map(company => <li> {company.name} </li>)}
+          </ul>
+        )
+      };
+
 
 
       class App extends Component{
@@ -64,7 +72,7 @@
               <Route render = { () => <Nav companies = { companies } /> } />
               <Switch>
                 <Route exact path ='/' component= { Home } />
-
+                <Route path ='/companies' render = { () => <Companies companies = { companies } /> }/>
               </Switch>
             </HashRouter>
           )
