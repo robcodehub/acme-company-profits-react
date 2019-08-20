@@ -67,6 +67,41 @@
       };
 
 
+    class Company extends Component {
+      constructor(){
+          super();
+          this.state = {
+            company: {}
+          }
+        }
+
+        async componentDidMount(){
+          const company = (await axios.get(`https://acme-users-api-rev.herokuapp.com/api/companies/${this.props.match.params.id}/companyProfits`)).data
+          this.setState({ company })
+        }
+
+
+        // Add component DidUpdate
+        async componentDidUpdate(prevProps){
+          if (this.props.match.params.id !== prevProps.match.params.id) {
+          const company = (await axios.get(`https://acme-users-api-rev.herokuapp.com/api/companies/${this.props.match.params.id}/companyProfits`)).data
+          this.setState({ company })
+          }
+        }
+
+        render() {
+          const {company} = this.state;
+          return (
+            <ul>
+              <li>  {company.fiscalYear}  </li>
+
+            </ul>
+          )
+        }
+
+    }
+
+
       class App extends Component{
         constructor(){
           super();
@@ -80,7 +115,6 @@
           this.setState({ companies })
         }
 
-        // Add component DidUpdate
 
         // render function
         render(){
