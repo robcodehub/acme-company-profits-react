@@ -8,6 +8,17 @@
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <style>
 
+      body {
+        font-family: verdana;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-around;
+
+      }
+
+
     </style>
   </head>
   <body>
@@ -21,15 +32,21 @@
       const Nav = ({ companies }) => {
         return (
           <div className = 'nav'>
-            <Link to='/'>Home</Link>
-            <Link to='/companies'>Companies</Link>
+            <Link to='/'>Acme Company Profits with React Router</Link>
+            <Link to='/companies'>Companies ({companies.length}) </Link>
           </div>
         )
       };
 
+      const Home = () => {
+        return <div>Welcome!</div>
+      };
+
+
+
       class App extends Component{
         constructor(){
-          super()
+          super();
           this.state = {
             companies: []
           }
@@ -45,13 +62,17 @@
           return (
             <HashRouter>
               <Route render = { () => <Nav companies = { companies } /> } />
+              <Switch>
+                <Route exact path ='/' component= { Home } />
+
+              </Switch>
             </HashRouter>
           )
         }
 
       }
 
-      render(<App />, root)
+      render(<App />, root);
 
     </script>
   </body>
