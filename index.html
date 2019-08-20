@@ -42,7 +42,7 @@
         return <div>Welcome!</div>
       };
 
-      const Companies = ( { companies, match }) => {
+      /*const Companies = ( { companies, match }) => {
         return (
           <div>
             <ul>
@@ -50,6 +50,16 @@
             </ul>
             <Route path = '/companies:id' render = { ({match}) => <Company companies = { companies } match = {match} /> }/>
           </div>
+        )
+      };
+*/
+
+
+      const Companies = ( { companies }) => {
+        return (
+          <ul>
+            {companies.map(company => <li> {company.name} </li>)}
+          </ul>
         )
       };
 
@@ -68,7 +78,7 @@
         }
 
         // Add component DidUpdate
-        
+
         // render function
         render(){
           const { companies } = this.state
@@ -77,7 +87,7 @@
               <Route render = { () => <Nav companies = { companies } /> } />
               <Switch>
                 <Route exact path ='/' component= { Home } />
-                <Route path ='/companies:id' render = { ({ match }) => <Companies companies = { companies } match = { match }/> }/>
+                <Route path ='/companies' render = { () => <Companies companies = { companies } /> }/>
                 <Redirect to = '/' />
               </Switch>
             </HashRouter>
