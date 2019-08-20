@@ -58,7 +58,7 @@
       const Companies = ( { companies }) => {
         return (
           <ul>
-            {companies.map(company => <li> {company.name} </li>)}
+            {companies.map(company => <li> <Link to= {`/companies/${company.id}`}>{company.name} </Link></li>)}
           </ul>
         )
       };
