@@ -57,9 +57,12 @@
 
       const Companies = ( { companies }) => {
         return (
+          <div>
           <ul>
             {companies.map(company => <li> <Link to= {`/companies/${company.id}`}>{company.name} </Link></li>)}
           </ul>
+          <Route path = '/companies:id' render = { ({match}) => <Company companies = { companies } match = {match} /> }/>
+          </div>
         )
       };
 
