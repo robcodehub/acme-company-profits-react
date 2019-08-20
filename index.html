@@ -24,8 +24,27 @@
 
 <body>
 
-    <script type="text/babel">
+  <div id='root'>
 
+
+  </div>
+
+
+    <script type="text/babel">
+    const root = document.querySelector('#root');
+    const { render } = ReactDOM;
+    const { Component } = React;
+    const { HashRouter, Route, Switch, Link, Redirect } = ReactRouterDOM;
+
+    const Nav = ({ companies }) => {
+      return (
+        <div className = 'nav'>
+          <Link to='/'>Home</Link>
+          <Link to='/companies'>Companies</Link>
+         </div>
+      )
+
+    };
 
 
     </script>
